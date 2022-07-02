@@ -1,10 +1,9 @@
 # Welcome to the Meal-Wheel!
 
-
 **Author**: Dom Giacona, Elaine Huynh, Elizabeth Beagle, KC Hofstetter
 **Version**: 1.3.0 
 
-## Overview
+## Meal-Wheel Overview
 Are you tired of wondering what to make for dinner? Bored of the same old recipes? Let the Meal-Wheel™ take those concerns off your plate! With the press of a button, the wheel will randomly generate fresh recipe options tailored to your preferences. Explore different types of cuisines, save your favorite recipes, then share them with your friends. Unlimited spins, unlimited possibilities. Dinner starts at the Meal-Wheel™.
 
 ## Getting Started
