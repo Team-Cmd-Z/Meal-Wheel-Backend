@@ -25,16 +25,13 @@ Are you tired of wondering what to make for dinner? Bored of the same old recipe
 
 ## Planning Process + Tools
 
-- [Task Board](https://www.figma.com/file/pEkToYnDUGIEcniFiL54P7/301-Project?node-id=0%3A1)
-- [Domain Model](linked)
-- [Wireframe](https://www.figma.com/file/Yena0C47DjM6qkXmdhbyTk/Meal-Wheel-Wireframe?node-id=475%3A145)
-
-## Data Flow
-
-[walk through each feature: the user path + how it will be implemented]
+- [Task Board](https://trello.com/b/8O1gT5QL/meal-wheel)
+- [Domain Model + Data Flow](https://www.figma.com/file/pEkToYnDUGIEcniFiL54P7/Meal-Wheel-Data-Flow?node-id=37%3A160)
+- [Wireframe](https://www.figma.com/file/mRcBim7PrI9xVeM0spvFOc/Untitled?node-id=0%3A1)
+- [User Stories](https://docs.google.com/document/d/1MaCrT9ocekRI0DcoY9DVHi8MGTY88YfMMUbiLhn8_5c/edit)
 
 ## References
 
 - [Spoonacular API](https://spoonacular.com/food-api)
 - [Figma](Figma.com)
-- etc.
+- [Trello](Trello.com)
