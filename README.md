@@ -1,18 +1,12 @@
 # Welcome to the Meal-Wheel!
 
-## Meal-Wheel Overview
+**Author**: Dom Giacona, Elaine Huynh, Elizabeth Beagle, KC Hofstetter
+**Version**: 1.3.0 
 
+## Meal-Wheel Overview
 Are you tired of wondering what to make for dinner? Bored of the same old recipes? Let the Meal-Wheel™ take those concerns off your plate! With the press of a button, the wheel will randomly generate fresh recipe options tailored to your preferences. Explore different types of cuisines, save your favorite recipes, then share them with your friends. Unlimited spins, unlimited possibilities. Dinner starts at the Meal-Wheel™.
 
-## The Team
-
-- Elaine Huynh
-- KC Hofstetter
-- Dominic Giacona
-- Elizabeth Beale
-
 ## Getting Started
-
 - Clone this repository using `git clone`
 - Run `npm install`
 - Add your API key to `.env.sample`
@@ -20,9 +14,14 @@ Are you tired of wondering what to make for dinner? Bored of the same old recipe
 
 ## MVP Features
 
-(will expand)
+#### Home Page
+- Displays a revolving wheel with sections of various cuisines that can be spun by a user to select a random cuisine. The user can then navigate to the recipes page to view recipes related to the selected cuisine.
 
-Nav bar with spinning wheel and an about page explaining our idea and introducing our team. On the spinning wheel page there will be a button to spin the wheel that selects a category of food and then populates a list of recipes to cook.
+#### Recipes Page
+- This page will render a list of recipes the user can save/favorite to store in their collection. Users can update and delete various recipes from saved collections as well as add notes to each recipe for future use.
+
+#### About Us
+- Brief summaries of each team members experience, education, and goals.
 
 ## Planning Process + Tools
 
