@@ -1,0 +1,27 @@
+{
+  "name": "meal-wheel-backend",
+  "version": "1.0.0",
+  "description": "301 final project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Cmd-Z/Meal-Wheel-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Team-Cmd-Z/Meal-Wheel-Backend/issues"
+  },
+  "homepage": "https://github.com/Team-Cmd-Z/Meal-Wheel-Backend#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.3"
+  }
+}
