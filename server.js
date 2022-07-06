@@ -36,20 +36,31 @@ async function getRecipes(req, res, next) {
     let cuisine = req.query.cuisine;
     let url = `https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&number=6&apiKey=${process.env.SPOON_API_KEY}`;
     console.log(url);
-    let apiResultCuisine = await axios.get(url);
-    let recipeArr = apiResultCuisine.data.results;
+    let apiResultOne = await axios.get(url);
+    let recipeArr = apiResultOne.data.results;
     console.log(recipeArr[0]);
     res.status(200).send(recipeArr);
-    // FOR-LOOP THRU 6 RESULTS.
-    // for (let i = 0; i < 0; i++) {
   } catch(error) {
-    // cuisineOne = results[0][i].id
-    // let results = await recipes.find();
     next(error);
   }
 }
 
 // another GET request to get specific recipe
+
+app.get('/recipelist', getActualRecipe);
+async function getActualRecipe(req, res, next) {
+  try {
+    let recipeId = req.query.recipeId;
+    let url = `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=false&apiKey=${process.env.SPOON_API_KEY}`;
+    console.log(url);
+    let apiResultTwo = await axios.get(url);
+    let recipeObj = apiResultTwo.data.results;
+    console.log(recipeObj);
+    res.status(200).send(recipeObj);
+  } catch(error) {
+    next(error);
+  }
+}
 
 app.get ('*', (req, res) => {
   res.status(404).send('Looks like that place doesn\'t exist.');
