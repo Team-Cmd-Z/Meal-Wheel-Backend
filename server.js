@@ -54,11 +54,31 @@ async function getActualRecipe(req, res, next) {
     let url = `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=false&apiKey=${process.env.SPOON_API_KEY}`;
     console.log(url);
     let apiResultTwo = await axios.get(url);
-    let recipeObj = apiResultTwo.data.results;
-    console.log(recipeObj);
-    res.status(200).send(recipeObj);
+
+    let fullRecipeObj = apiResultTwo.data;
+    console.log(fullRecipeObj);
+
+    let groomedRecipe = new ActualRecipe(fullRecipeObj);
+
+    console.log(groomedRecipe);
+    res.status(200).send(groomedRecipe);
   } catch(error) {
     next(error);
+  }
+}
+
+// CLASS CONSTRUCTOR
+
+class ActualRecipe {
+  constructor(fullRecipeObj){
+
+    let ingredients = [];
+    fullRecipeObj.extendedIngredients.map(obj => ingredients.push(obj.original));
+
+    this.title = fullRecipeObj.title;
+    this.ingredients = ingredients;
+    this.instructions = fullRecipeObj.instructions;
+    this.image = fullRecipeObj.image;
   }
 }
 
