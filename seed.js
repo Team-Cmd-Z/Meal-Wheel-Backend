@@ -10,7 +10,7 @@ async function seed() {
     title: 'Sauteed Mash Fried Eggs',
     imageUrl: 'https://media.eggs.ca/assets/RecipeThumbs/_resampled/FillWyIxMjgwIiwiNzIwIl0/Masala-Egg-Chops-CMS.jpg',
     ingredients: '2 eggs, 1 mash',
-    directions: 'Use your mash to mash the eggs and sautee for 45 minutes.',
+    instructions: 'Use your mash to mash the eggs and sautee for 45 minutes.',
     notes: 'Do not make again.'
   });
   console.log('Cooked mashed eggs');
