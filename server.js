@@ -100,7 +100,7 @@ app.get('/recipes/collection', getSaved);
 async function getSaved (req, res, next) {
   try {
     const savedRecipes = await recipes.find();
-  res.status(200).send(savedRecipes);
+    res.status(200).send(savedRecipes);
   } catch (error) {
     res.status(404).send('Not found.');
     next(error);
