@@ -82,11 +82,8 @@ class ActualRecipe {
   }
 }
 
-app.get ('*', (req, res) => {
-  res.status(404).send('Looks like that place doesn\'t exist.');
-});
-
 // ------------- POST ------------
+
 app.post('/recipes', async (req, res, next) => {
   try {
     const likedRecipe = await recipes.create(req.body);
@@ -96,6 +93,19 @@ app.post('/recipes', async (req, res, next) => {
     next(error);
   }
 });
+
+
+// ------------- GET ------------
+app.get('/recipes/collection', getSaved);
+async function getSaved (req, res, next) {
+  try {
+    const savedRecipes = await recipes.find();
+  res.status(200).send(savedRecipes);
+  } catch (error) {
+    res.status(404).send('Not found.');
+    next(error);
+  }
+}
 
 // ------------- POST ------------
 app.put('/recipes/:id', async (req, res, next) => {
@@ -120,6 +130,10 @@ async function deleteRecipe(req, res, next) {
     next(error);
   }
 }
+
+app.get ('*', (req, res) => {
+  res.status(404).send('Looks like that place doesn\'t exist.');
+});
 
 // ---------- ERRORS ----------
 app.use((error, req, res) => {
