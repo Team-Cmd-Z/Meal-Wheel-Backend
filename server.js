@@ -96,7 +96,7 @@ app.post('/recipes', async (req, res, next) => {
 
 
 // ------------- GET ------------
-app.get('/recipe/collection', getSaved);
+app.get('/recipes/collection', getSaved);
 async function getSaved (req, res, next) {
   try {
     const savedRecipes = await recipes.find();
