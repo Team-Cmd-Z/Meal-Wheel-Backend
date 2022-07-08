@@ -1,25 +1,31 @@
 'use strict';
 
 const jwt = require('jsonwebtoken');
+
 const jwksClient = require('jwks-rsa');
+
 const clients = jwksClient({
-  jwksUri: process.env.JWKS_URI
+  jwksUri: process.env.JWKS_URI,
 });
 
-let getKey = (header, callback) => {
-  clients.getSigningKey(header.kid, function(key){
+function getKey(header, callback){
+  console.log(`header: ${JSON.stringify(header)}`)
+  clients.getSigningKey(header.kid, function(err, key){
     var signingKey = key.publicKey || MediaKeyStatusMap.rsaPublicKey;
     callback(null, signingKey);
-  });
-};
+  })
+}
+  
+  const verifyUser = (req, errorFirstOrUseTheUserCallbackFunction) => {
+    // stops if authenitcation fails
+    console.log('hi');
+    console.log(req.headers);
+    try{
+      const token = req.headers.authorization.split(' ')[1];
+      jwt.verify(token, getKey, {}, errorFirstOrUseTheUserCallbackFunction);
+    }catch(error){
+      errorFirstOrUseTheUserCallbackFunction('not authorized');
+    }
+  };
 
-const verifyUser = (request, callbackFunction) => {
-  try {
-    const token = request.headers.authorization.split(' ')[1];
-    jwt.verify(token, getKey, {}, callbackFunction);
-  } catch (error) {
-    callbackFunction('Not Authorized');
-  }
-};
-
-module.exports = verifyUser;
+  module.exports = verifyUser;
