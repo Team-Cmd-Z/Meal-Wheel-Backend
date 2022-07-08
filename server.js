@@ -7,6 +7,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const recipes = require('./modules/recipes.js');
 const axios = require('axios');
+const verifyUser = require('./auth');
+const { response } = require('express');
 
 mongoose.connect(process.env.DB_URL);
 
@@ -31,18 +33,24 @@ const PORT = process.env.PORT || 3002;
 
 app.get('/recipes', getRecipes);
 async function getRecipes(req, res, next) {
-  try {
-    // TO DO -- ADD RANDOMIZER!
-    let cuisine = req.query.cuisine;
-    let url = `https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&number=6&apiKey=${process.env.SPOON_API_KEY}`;
-    console.log(url);
-    let apiResultOne = await axios.get(url);
-    let recipeArr = apiResultOne.data.results;
-    console.log(recipeArr[0]);
-    res.status(200).send(recipeArr);
-  } catch(error) {
-    next(error);
-  }
+  verifyUser(req, async (error) => {
+    if (error) {
+      response.send('Invalid Token');
+    } else {
+      try {
+        // TO DO -- ADD RANDOMIZER!
+        let cuisine = req.query.cuisine;
+        let url = `https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&number=6&apiKey=${process.env.SPOON_API_KEY}`;
+        console.log(url);
+        let apiResultOne = await axios.get(url);
+        let recipeArr = apiResultOne.data.results;
+        console.log(recipeArr[0]);
+        res.status(200).send(recipeArr);
+      } catch (error) {
+        next(error);
+      }
+    }
+  });
 }
 
 // another GET request to get specific recipe
@@ -62,7 +70,7 @@ async function getActualRecipe(req, res, next) {
 
     console.log(groomedRecipe);
     res.status(200).send(groomedRecipe);
-  } catch(error) {
+  } catch (error) {
     next(error);
   }
 }
@@ -70,7 +78,7 @@ async function getActualRecipe(req, res, next) {
 // CLASS CONSTRUCTOR
 
 class ActualRecipe {
-  constructor(fullRecipeObj){
+  constructor(fullRecipeObj) {
 
     let ingredients = [];
     fullRecipeObj.extendedIngredients.map(obj => ingredients.push(obj.original));
@@ -88,7 +96,7 @@ app.post('/recipes', async (req, res, next) => {
   try {
     const likedRecipe = await recipes.create(req.body);
     res.status(200).send(likedRecipe);
-  } catch(error) {
+  } catch (error) {
     res.status(404).send('Not found.');
     next(error);
   }
@@ -97,7 +105,7 @@ app.post('/recipes', async (req, res, next) => {
 
 // ------------- GET ------------
 app.get('/recipes/collection', getSaved);
-async function getSaved (req, res, next) {
+async function getSaved(req, res, next) {
   try {
     const savedRecipes = await recipes.find();
     res.status(200).send(savedRecipes);
@@ -114,7 +122,7 @@ app.put('/recipes/:id', async (req, res, next) => {
     let data = req.body;
     const updatedRecipe = await recipes.findByIdAndUpdate(id, data, { new: true, overwrite: true });
     res.status(200).send(updatedRecipe);
-  } catch(error) {
+  } catch (error) {
     next(error);
   }
 });
@@ -126,12 +134,12 @@ async function deleteRecipe(req, res, next) {
   try {
     await recipes.findByIdAndDelete(id);
     res.status(200).send('Recipe deleted.');
-  } catch(error) {
+  } catch (error) {
     next(error);
   }
 }
 
-app.get ('*', (req, res) => {
+app.get('*', (req, res) => {
   res.status(404).send('Looks like that place doesn\'t exist.');
 });
 
